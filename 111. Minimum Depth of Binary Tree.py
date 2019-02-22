@@ -2,7 +2,7 @@
 # @Author: Zengjq
 # @Date:   2019-02-21 11:14:01
 # @Last Modified by:   Zengjq
-# @Last Modified time: 2019-02-22 18:52:07
+# @Last Modified time: 2019-02-22 19:35:20
 
 import collections
 
@@ -12,7 +12,7 @@ class Solution:
     # 广度优先 层层遍历
 
     # 100% mem 66%
-    def minDepth2(self, root: 'TreeNode') -> 'int':
+    def minDepth(self, root: 'TreeNode') -> 'int':
         if not root:
             return 0
         min_level = 0
@@ -31,9 +31,20 @@ class Solution:
                 if not node.left and not node.right:
                     return min_level
 
+    # 99% mem 23%
+    # 分治 可以看作深度优先的优化
+    def minDepth2(self, root: 'TreeNode') -> 'int':
+        if not root:
+            return 0
+        if not root.left:
+            return 1 + self.minDepth2(root.right)
+        if not root.right:
+            return 1 + self.minDepth2(root.left)
+        return 1 + min(self.minDepth2(root.left), self.minDepth2(root.right))
+
     # 93% mem 14%
     # 深度优先
-    def minDepth(self, root: 'TreeNode') -> 'int':
+    def minDepth3(self, root: 'TreeNode') -> 'int':
         if not root:
             return 0
         self.min_level = None

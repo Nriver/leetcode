@@ -2,12 +2,13 @@
 # @Author: Zengjq
 # @Date:   2019-02-21 11:14:01
 # @Last Modified by:   Zengjq
-# @Last Modified time: 2019-02-22 18:43:57
+# @Last Modified time: 2019-02-22 19:28:22
 
 import collections
 
 
 class Solution:
+
     # 100% 内存 91%
     # 广度优先 层层遍历
 
@@ -29,6 +30,13 @@ class Solution:
                 if node.right:
                     queue.append(node.right)
         return max_level
+
+    # 99% mem 67%
+    # 分治的方法 可以看成是深度优先的优化
+    def maxDepth3(self, root: 'TreeNode') -> 'int':
+        if not root:
+            return 0
+        return 1 + max(self.maxDepth3(root.left), self.maxDepth3(root.right))
 
     # 99% 内存12%
     # 深度优先
